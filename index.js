@@ -28,11 +28,19 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * The difference between the two is that counter1 has count being in function scope and counter2 has count in global scope. Also counter1 has a function inside a function.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
+ * 
+ * counter1 because of count being INSIDE the function and a function being inside a function.
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
  *
+ * 
+ * 
+ * 
 */
+
 
 // counter1 code
 function counterMaker() {
@@ -56,11 +64,12 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){
+  let points = Math.floor(Math.random() * 3 );
+  return points
 }
+
+console.log(inning())
 
 /* Task 3: finalScore()
 
@@ -76,9 +85,9 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(inning, inningNumber){
 
-  /*Code Here*/
+ 
 
 }
 

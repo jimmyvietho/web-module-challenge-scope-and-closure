@@ -28,16 +28,21 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
- * The difference between the two is that counter1 has count being in function scope and counter2 has count in global scope. Also counter1 has a function inside a function.
+ * The difference between the two is that counter1 has "count" being in function scope and counter2 has "count" in global scope. Also counter1 has a function inside a function, which makes counter1 a higher order function.
  * 
  * 2. Which of the two uses a closure? How can you tell?
  * 
- * counter1 because of count being INSIDE the function and a function being inside a function.
+ * counter1 because of "count" being INSIDE the function
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
  *
+ * counter1 doesn't keep track of all counts, it only keeps track of a specific event. 
  * 
+ * Scenario: keep count of all the people entering the bus at one stop.
  * 
+ * counter2 keeps track of all time. 
+ * 
+ * Scenario: keep count of all the people that entered the bus for the whole day.
  * 
 */
 
@@ -69,11 +74,11 @@ function inning(){
   return points
 }
 
-console.log(inning())
+
 
 /* Task 3: finalScore()
 
-Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
+Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and returns the final score of the game in the form of an object.
 
 For example, 
 
@@ -86,10 +91,21 @@ finalScore(inning, 9) might return:
 */ 
 
 function finalScore(inning, inningNumber){
-
- 
+  let home = 0;
+  let away = 0;
+  for(let i = 0; i <= inningNumber; i++){
+    home += inning();
+  }
+  for(let j = 0; j <= inningNumber; j++){
+    away += inning();
+  }
+    return {
+      "Home": home,
+      "Away": away
+    }
 
 }
+
 
 /* Task 4: 
 
@@ -112,8 +128,30 @@ and returns the score at each pont in the game, like so:
 Final Score: awayTeam - homeTeam */
 
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(inning, inningNumber) {
+  let homeTeam = 0;
+  let awayTeam = 0;
+ 
+  for(let i = 1; i <= inningNumber; i++) {
+    homeTeam += inning();
+    awayTeam += inning();
+    if (i == 1) {
+      console.log(`${i}st inning: ${awayTeam} - ${homeTeam}`)
+    }
+    else if(i == 2) {
+      console.log(`${i}nd inning: ${awayTeam} - ${homeTeam}`)
+    }
+    else if(i == 3) {
+      console.log(`${i}rd inning: ${awayTeam} - ${homeTeam}`)
+    }
+    else {
+      console.log(`${i}th inning: ${awayTeam} - ${homeTeam}`)
+    }
+  }
+  return `Final Score: ${awayTeam} - ${homeTeam}`
 }
+
+console.log(scoreboard(inning, 9))
+
 
 
